@@ -10,28 +10,28 @@ using namespace std;
 
 bool LoadCSVFile(string csvFile,string &csvString){
     FILE* fp = fopen(csvFile.c_str(), "rb");
-	if(fp == 0) return false;
+    if(fp == 0) return false;
 
     fseek(fp, 0, SEEK_END);
-	long len = ftell(fp);
-	char *buffer = new char[len+1];
+    long len = ftell(fp);
+    char *buffer = new char[len+1];
     fseek(fp, 0, SEEK_SET);
-	fread(buffer, 1, len, fp);
-	fclose(fp);
+    fread(buffer, 1, len, fp);
+    fclose(fp);
     buffer[len] = '\0';
-	csvString.assign(buffer, len);
+    csvString.assign(buffer, len);
 
     delete[] buffer;
     return true;
 }
 
 enum ParseState{
-    PrepareNewField,    // prepare to start new field	
-	NormalField,        // (normal char received) normal-field started
-	QuotesField,        // (quotes received) quotes-field started
-	SecondQuotesField , // quotes-field started,and have received second quotes
-	CRReceived,         // (in normalField) have received CR
-	Error,              // final state, parse error 
+    PrepareNewField,    // prepare to start new field   
+    NormalField,        // (normal char received) normal-field started
+    QuotesField,        // (quotes received) quotes-field started
+    SecondQuotesField , // quotes-field started,and have received second quotes
+    CRReceived,         // (in normalField) have received CR
+    Error,              // final state, parse error 
     Success,            // final state, parse success 
 };
 
