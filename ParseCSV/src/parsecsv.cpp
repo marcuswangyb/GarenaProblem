@@ -207,7 +207,7 @@ bool ParseCSV(vector<vector<string>> &result, const string &csv){
 int main(int argc,char** argv)
 {
     string csvString;
-    bool ret = LoadCSVFile(".\\data\\case0-6.csv",csvString);
+    bool ret = LoadCSVFile(".\\data\\case0-7.csv",csvString);
     if(ret){
         vector<vector<string>> res;
         if(ParseCSV(res,csvString))
